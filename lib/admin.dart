@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'user.dart';
+import 'map.dart';
 
 class AdminPage extends StatefulWidget {
-  static String tag= 'user-page';
+  static String tag= 'admin-page';
   @override
   _AdminPageState createState() => new _AdminPageState();
 }
@@ -10,17 +12,6 @@ class _AdminPageState extends State<AdminPage>{
   @override
   Widget build(BuildContext context) {
 
-    Widget buildButton(IconData icon, String title){
-      final Color bcol= Colors.black;
-      return new Column(
-        children: <Widget>[
-          new Icon(icon, color: bcol,size: 30),
-          new Container(
-            child: new Text(title, style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: bcol)),
-          )
-        ],
-      );
-    }
     Widget adminpage = new Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -28,11 +19,32 @@ class _AdminPageState extends State<AdminPage>{
             children: <Widget>[
               new ButtonBar(
                 children: <Widget>[
-                  buildButton(Icons.home, "Home"),
-                  buildButton(Icons.map, "Map"),
-                  buildButton(Icons.list, "Requests"),
+                  new Column(
+                    children: <Widget>[
+                      new IconButton(icon: Icon(Icons.home), onPressed:(){} ,iconSize: 34, color: Colors.black),
+                      new Container(
+                        child: new Text('Home', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
+                      )
+                    ],
+                  ),
+                  new Column(
+                    children: <Widget>[
+                      new IconButton(icon: Icon(Icons.map), onPressed:(){} ,iconSize: 34, color: Colors.black),
+                      new Container(
+                        child: new Text('Map', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
+                      )
+                    ],
+                  ),
+                  new Column(
+                    children: <Widget>[
+                      new IconButton(icon: Icon(Icons.insert_drive_file), onPressed:(){} ,iconSize: 34, color: Colors.black),
+                      new Container(
+                        child: new Text('Requests', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
+                      )
+                    ],
+                  )
                 ],
-                alignment: MainAxisAlignment.spaceBetween,
+                alignment: MainAxisAlignment.spaceEvenly,
               )
             ],
             mainAxisAlignment: MainAxisAlignment.end,

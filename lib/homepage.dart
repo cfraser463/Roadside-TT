@@ -47,7 +47,7 @@ class MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 new Container(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                 ),
                 new RaisedButton(
                   onPressed: () {
@@ -67,9 +67,6 @@ class MyHomePageState extends State<MyHomePage> {
                       borderRadius: new BorderRadius.circular(10.0)
                   ),
                 ),
-                new Container(
-                  padding: const EdgeInsets.only(top: 50.0, bottom: 20.0),
-                )
               ],
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             )
