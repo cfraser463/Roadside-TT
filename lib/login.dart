@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'user.dart';
-import 'admin.dart';
+//import 'user.dart';
+//import 'admin.dart';
 import 'map.dart';
 
 class LoginPage extends StatefulWidget {

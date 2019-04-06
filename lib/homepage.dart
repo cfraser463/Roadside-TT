@@ -46,9 +46,9 @@ class MyHomePageState extends State<MyHomePage> {
                       borderRadius: new BorderRadius.circular(10.0)
                   ),
                 ),
-                new Container(
-                  padding: const EdgeInsets.only(top: 30.0),
-                ),
+//                new Container(
+//                  padding: const EdgeInsets.only(top: 30.0),
+//                ),
                 new RaisedButton(
                   onPressed: () {
                     Navigator.push(
