@@ -122,6 +122,7 @@ class LoginPageState extends State<LoginPage> {
     // compare regPassword and confirm password to be the same
     if (regName == "" || regName == null) {
       alert("Please enter you full name");
+//      alert("Please enter you full name");
       return false;
     }
     else
