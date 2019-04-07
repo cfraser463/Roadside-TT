@@ -21,16 +21,17 @@ class _RequestPageState extends State<RequestPage> {
 
   // used to populate the dropdown menu
   List<String> services= ['Accident', 'Car not starting', 'Dead Battery', 'Flat Tyre', 'No gas'];
-//  String dropdown;
 
   // variables which represent the fields of the form
   String nameText="Hard coded name";
+
 
 
   String contactNumberText="";
   String plateNumberText="";
   String serviceNeeded;
   bool transportValue = false;
+  List locationList = new List();
 //  bool _value1 = false;
 //  bool _value2 = false;
 
@@ -58,17 +59,20 @@ class _RequestPageState extends State<RequestPage> {
     this.contactNumberText = contactNumberController.text.toString();
     this.plateNumberText = plateNumberController.text.toString();
     print("Submit is being called");
-//    if (nameText == "") print("Name field blank");
-
-    if(validateForm()){
+      locationList = getLocation();
+      print("Test getlocation worked");
       createRequest();
-//      print("Form is valid");
+      print("Test createResquest worked");
 
-//      Navigator.push(
-//        context,
-//        MaterialPageRoute(builder: (context) => EtaPage()),
-//      );
-    }// end if valid
+//    if(validateForm()){
+//      createRequest();
+////      print("Form is valid");
+//
+////      Navigator.push(
+////        context,
+////        MaterialPageRoute(builder: (context) => EtaPage()),
+////      );
+//    }// end if valid
 //    else print("Form NOT valid");
   }// end submitButtonPressed
 
@@ -111,10 +115,25 @@ class _RequestPageState extends State<RequestPage> {
       'contact number': '$contactNumberText',
       'plate number': '$plateNumberText',
       'service': '$serviceNeeded',
-      'transport requested': '$transportValue'
+      'transport requested': '$transportValue',
+      'location' : '$locationList',
     });
     setState(() => this.requestID = ref.documentID);
 //    print("Request made with id : " + this.requestID);
+  }
+
+  // this function returns a list with lattitude in list(0) and longitude in list(1)
+  // in future this can be a bool function which just sets the global variable called location
+  // so if submition called this can fail if there is an issue with getting the location from the phone
+  List getLocation(){
+    //Hard coded values have been used until we can access the mobiles location
+    final double lattitude = 10.626040;
+    final double longitude = -61.353627;
+
+    List locationCoordinates= new List();
+    locationCoordinates.add(lattitude);
+    locationCoordinates.add(longitude);
+    return locationCoordinates;
   }
 
   //-------------------------------End of variables and methods ---------------------------------------------
@@ -125,7 +144,6 @@ class _RequestPageState extends State<RequestPage> {
 
   @override
   Widget build(BuildContext context) {
-
       Widget requestpage = new Stack(
         fit: StackFit.expand,
         children: <Widget>[
