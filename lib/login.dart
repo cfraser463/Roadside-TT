@@ -1,4 +1,8 @@
+//import libraries
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+//import pages
 //import 'user.dart';
 //import 'admin.dart';
 import 'map.dart';
@@ -14,32 +18,65 @@ enum FormType {
 
 class LoginPageState extends State<LoginPage> {
 
-  final TextEditingController emailFilter = new TextEditingController();
-  final TextEditingController passwordFilter = new TextEditingController();
+  // -------------------- VARIABLES AND METHODS -----------------------------------------------------------------------
+
+  final db = Firestore.instance;
+
+  // ------------ login variables ------------------------
   String email = "";
   String password = "";
   FormType form = FormType.login;
 
+  final TextEditingController emailFilter = new TextEditingController();
+  final TextEditingController passwordFilter = new TextEditingController();
+  // ------------ register/create Account variables ------------------------
+
+//  fields needed in a user account
+//  userid
+//  name
+//  phone number
+//  email
+//  password
+//  credit card number
+//  user type
+
+
+  String regName = "";
+  String regAge = "";
+  String regEmail = "";
+  String regContactNumber = "";
+  String regPassword = "";
+  String confirmPassword = "";
+//  String regInsurance = "";
+
+  final TextEditingController regNameController = new TextEditingController();
+  final TextEditingController regAgeController = new TextEditingController();
+  final TextEditingController regEmailController = new TextEditingController();
+  final TextEditingController regContactNumberController = new TextEditingController();
+  final TextEditingController regPasswordController = new TextEditingController();
+  final TextEditingController confirmPasswordController = new TextEditingController();
+
+
   LoginPageState() {
-    emailFilter.addListener(emailListen);
-    passwordFilter.addListener(passwordListen);
+//    emailFilter.addListener(emailListen);
+//    passwordFilter.addListener(passwordListen);
   }
 
-  void emailListen() {
-    if (emailFilter.text.isEmpty) {
-      email = "";
-    } else {
-      email = emailFilter.text;
-    }
-  }
-
-  void passwordListen() {
-    if (passwordFilter.text.isEmpty) {
-      password = "";
-    } else {
-      password = passwordFilter.text;
-    }
-  }
+//  void emailListen() {
+//    if (emailFilter.text.isEmpty) {
+//      email = "";
+//    } else {
+//      email = emailFilter.text;
+//    }
+//  }
+//
+//  void passwordListen() {
+//    if (passwordFilter.text.isEmpty) {
+//      password = "";
+//    } else {
+//      password = passwordFilter.text;
+//    }
+//  }
 
   // Swap in between our two forms, registering and logging in
   void formChange () async {
@@ -51,6 +88,90 @@ class LoginPageState extends State<LoginPage> {
       }
     });
   }
+
+  void loginPressed () {
+    print('The user wants to login with $email and $password');
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapPage()),
+    );
+  }
+
+  void createAccountPressed () async{
+    if (validateCreateForm()) {
+      DocumentReference ref = await db.collection('users').add({
+        'name': '$regName',
+        'age': '$regAge',
+        'email': '$regEmail',
+        'contact number': '$regContactNumber',
+        'password' : '$regPassword',
+        'credit card' : '',
+        'user type' : 'customer',
+      });
+      formChange();
+    }
+//    print('Teast that create account worked --------------------------------------------');
+
+  }
+
+  bool validateCreateForm(){
+    // this is only partial validation
+    //TODO
+    // Email format
+    // phone number format
+    // compare regPassword and confirm password to be the same
+    if (regName == "" || regName == null) {
+      alert("Please enter you full name");
+      return false;
+    }
+    else
+      if (regAge == "" || regAge == null) {
+        alert("Please enter your age");
+        return false;
+      }
+      else
+        if (regEmail == "" || regEmail == null) {
+          alert("Please enter your email address");
+          return false;
+        }
+        else
+          if (regContactNumber == "" || regContactNumber == null) {
+            alert("Please enter your phone number");
+            return false;
+          }
+          else
+            if (regPassword == "" || regPassword == null) {
+              alert("Please enter a password");
+              return false;
+            }
+            else
+              if (confirmPassword == "" || confirmPassword == null) {
+                alert("Please confirm your password");
+                return false;
+              }
+    return true;
+  }
+
+  void alert(String message){
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: new Text("Unable to submit request"),
+            content: new Text(message),
+          );
+        }
+    );// end show alert dialog
+  }
+
+  void passwordReset () {
+    print("The user wants a password reset request sent to $email");
+  }
+
+  //-------------------------------End of variables and methods ---------------------------------------------
+
+
+  //-------------------------------UI ELEMENTS ---------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -90,41 +211,41 @@ class LoginPageState extends State<LoginPage> {
                           ),
                           child: new Wrap(
                             children: <Widget>[
-                              Center(
-                                  child: new Container(
-                                    padding: const EdgeInsets.only(top: 25.0,bottom: 10.0),
-                                    child: new Text('Login', style: TextStyle(
-                                      fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black,),
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                  )
-                              ),
-                              new ListTile(
-                                contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
-                                leading: const Icon(Icons.person),
-                                title: new TextFormField(
-                                  controller: emailFilter,
-                                  decoration: new InputDecoration(
-                                    fillColor: Colors.black,
-                                    hintText: 'Please enter email',
-                                    labelText: 'Enter Your Email address',
-                                  ),
-                                  keyboardType: TextInputType.emailAddress,
-                                ),
-                              ),
-                              new ListTile(
-                                contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
-                                leading: const Icon(Icons.lock),
-                                title: new TextFormField(
-                                  controller: passwordFilter,
-                                  decoration: new InputDecoration(
-                                    hintText: 'Please enter password',
-                                    labelText: 'Enter Your Password',
-                                  ),
-                                  keyboardType: TextInputType.emailAddress,
-                                  obscureText: true,
-                                ),
-                              ),
+//                              Center(
+//                                  child: new Container(
+//                                    padding: const EdgeInsets.only(top: 25.0,bottom: 10.0),
+//                                    child: new Text('Login', style: TextStyle(
+//                                      fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black,),
+//                                      textAlign: TextAlign.justify,
+//                                    ),
+//                                  )
+//                              ),
+//                              new ListTile(
+//                                contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
+//                                leading: const Icon(Icons.person),
+//                                title: new TextFormField(
+//                                  controller: emailFilter,
+//                                  decoration: new InputDecoration(
+//                                    fillColor: Colors.black,
+//                                    hintText: 'Please enter email',
+//                                    labelText: 'Enter Your Email address',
+//                                  ),
+//                                  keyboardType: TextInputType.emailAddress,
+//                                ),
+//                              ),
+//                              new ListTile(
+//                                contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
+//                                leading: const Icon(Icons.lock),
+//                                title: new TextFormField(
+//                                  controller: passwordFilter,
+//                                  decoration: new InputDecoration(
+//                                    hintText: 'Please enter password',
+//                                    labelText: 'Enter Your Password',
+//                                  ),
+//                                  keyboardType: TextInputType.emailAddress,
+//                                  obscureText: true,
+//                                ),
+//                              ),
                               Center(
                                 child: Container(
                                   child: new Stack(
@@ -149,9 +270,45 @@ class LoginPageState extends State<LoginPage> {
 
    Widget buildButtons() {
     if (form == FormType.login) {
+      // ------------------------------------------Login card ------------------------------------------
       return new Container(
         child: new Column(
           children: <Widget>[
+            Center(
+                child: new Container(
+                  padding: const EdgeInsets.only(top: 25.0,bottom: 10.0),
+                  child: new Text('Login', style: TextStyle(
+                    fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black,),
+                    textAlign: TextAlign.justify,
+                  ),
+                )
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
+              leading: const Icon(Icons.person),
+              title: new TextFormField(
+                controller: emailFilter,
+                decoration: new InputDecoration(
+                  fillColor: Colors.black,
+                  hintText: 'Please enter email',
+                  labelText: 'Enter Your Email address',
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
+              leading: const Icon(Icons.lock),
+              title: new TextFormField(
+                controller: passwordFilter,
+                decoration: new InputDecoration(
+                  hintText: 'Please enter password',
+                  labelText: 'Enter Your Password',
+                ),
+                keyboardType: TextInputType.emailAddress,
+                obscureText: true,
+              ),
+            ),
             new RaisedButton(
               child: new Text('Login', style: TextStyle(color: Colors.amberAccent, fontSize: 20),),
               onPressed: loginPressed,
@@ -177,10 +334,93 @@ class LoginPageState extends State<LoginPage> {
           ],
         ),
       );
-    } else {
+    }
+    else { // otherwise form == FormType.register
+      // ------------------------------------------Create Account card ----------------------------------
       return new Container(
         child: new Column(
           children: <Widget>[
+            Center(
+                child: new Container(
+                  padding: const EdgeInsets.only(top: 25.0,bottom: 10.0),
+                  child: new Text('Create Account', style: TextStyle(
+                    fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black,),
+                    textAlign: TextAlign.justify,
+                  ),
+                )
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
+              leading: const Icon(Icons.person),
+              title: new TextFormField(
+                controller: regNameController,
+                decoration: new InputDecoration(
+                  fillColor: Colors.black,
+                  hintText: 'Please enter your name',
+                  labelText: 'Enter your full name',
+                ),
+              ),
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
+              leading: const Icon(Icons.person),
+              title: new TextFormField(
+                controller: regAgeController,
+                decoration: new InputDecoration(
+                  fillColor: Colors.black,
+                  hintText: 'Please enter your age',
+                  labelText: 'Enter your age',
+                ),
+              ),
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
+              leading: const Icon(Icons.person),
+              title: new TextFormField(
+                controller: regEmailController,
+                decoration: new InputDecoration(
+                  fillColor: Colors.black,
+                  hintText: 'Please enter email',
+                  labelText: 'Enter Your Email address',
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
+              leading: const Icon(Icons.lock),
+              title: new TextFormField(
+                controller: regContactNumberController,
+                decoration: new InputDecoration(
+                  hintText: 'Please enter contact number',
+                  labelText: 'Enter a phone number',
+                ),
+              ),
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
+              leading: const Icon(Icons.lock),
+              title: new TextFormField(
+                controller: regPasswordController,
+                decoration: new InputDecoration(
+                  hintText: 'Please enter password',
+                  labelText: 'Create a password',
+                ),
+                obscureText: true,
+              ),
+            ),
+            new ListTile(
+              contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
+              leading: const Icon(Icons.lock),
+              title: new TextFormField(
+                controller: confirmPasswordController,
+                decoration: new InputDecoration(
+                  hintText: 'Please enter password',
+                  labelText: 'Confirm password',
+                ),
+                obscureText: true,
+              ),
+            ),
             new RaisedButton(
               child: new Text('Create an Account', style: TextStyle(fontSize: 18, color: Colors.amberAccent),),
               onPressed: createAccountPressed,
@@ -202,23 +442,6 @@ class LoginPageState extends State<LoginPage> {
         ),
       );
     }
-  }
-
-  void loginPressed () {
-    print('The user wants to login with $email and $password');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MapPage()),
-      );
-  }
-
-  void createAccountPressed () {
-    print('The user wants to create an accoutn with $email and $password');
-
-  }
-
-  void passwordReset () {
-    print("The user wants a password reset request sent to $email");
   }
 
 

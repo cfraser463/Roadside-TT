@@ -110,7 +110,7 @@ class _RequestPageState extends State<RequestPage> {
 
   // This sends the form data to the database
   void createRequest() async {
-    DocumentReference ref = await db.collection('Requests').add({
+    DocumentReference ref = await db.collection('requests').add({
       'name': '$nameText',
       'contact number': '$contactNumberText',
       'plate number': '$plateNumberText',
