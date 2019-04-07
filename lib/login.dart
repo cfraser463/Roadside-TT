@@ -98,6 +98,13 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void createAccountPressed () async{
+    this.regName = regNameController.text.toString();
+    this.regAge = regAgeController.text.toString();
+    this.regEmail = regEmailController.text.toString();
+    this.regContactNumber = regContactNumberController.text.toString();
+    this.regPassword = regPasswordController.text.toString();
+    this.confirmPassword = confirmPasswordController.text.toString();
+
     if (validateCreateForm()) {
       DocumentReference ref = await db.collection('users').add({
         'name': '$regName',
@@ -118,10 +125,11 @@ class LoginPageState extends State<LoginPage> {
     // this is only partial validation
     //TODO
     // Email format
+    // Ensure email not already used
     // phone number format
     // compare regPassword and confirm password to be the same
     if (regName == "" || regName == null) {
-      alert("Please enter you full name");
+      alert("Please enter your full name");
 //      alert("Please enter you full name");
       return false;
     }
