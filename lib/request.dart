@@ -122,7 +122,7 @@ class _RequestPageState extends State<RequestPage> {
 //    print("Request made with id : " + this.requestID);
   }
 
-  // this function returns a list with lattitude in list(0) and longitude in list(1)
+  // this function returns a list with latitude in list(0) and longitude in list(1)
   // in future this can be a bool function which just sets the global variable called location
   // so if submition called this can fail if there is an issue with getting the location from the phone
   List getLocation(){

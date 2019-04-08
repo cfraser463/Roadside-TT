@@ -22,12 +22,13 @@ class _MapPageState extends State<MapPage>{
         children: <Widget>[
          new Container(
            margin: EdgeInsets.only(bottom: 75.0),
-           child: GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(61.4003, 10.6409), zoom: 19.124332),
+           child: GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(10.6409,61.4003), zoom: 21),
              onMapCreated: (controller){
               setState(() {
                 mycontroller= controller;
               });
              },
+             mapType: MapType.normal,
            ),
          ),
           new Column(
@@ -36,7 +37,12 @@ class _MapPageState extends State<MapPage>{
                 children: <Widget>[
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.home), onPressed:(){} ,iconSize: 30, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.home), onPressed:(){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserPage()),
+                        );
+                      } ,iconSize: 30, color: Colors.black),
                       new Container(
                         child: new Text('Home', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
                       )
@@ -52,7 +58,12 @@ class _MapPageState extends State<MapPage>{
                   ),
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.insert_drive_file), onPressed:(){} ,iconSize: 30, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.insert_drive_file), onPressed:(){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapPage()),
+                        );
+                      } ,iconSize: 30, color: Colors.black),
                       new Container(
                         child: new Text('Requests', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
                       )
@@ -68,7 +79,7 @@ class _MapPageState extends State<MapPage>{
     );
     return Scaffold(
         appBar: AppBar(
-          title: Text('Roadside Map'),
+          title: Text('Map'),
           centerTitle: true,
         ),
         body: mappage

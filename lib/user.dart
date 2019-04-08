@@ -29,7 +29,12 @@ class _UserPageState extends State<UserPage>{
                   ),
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.map), onPressed:(){} ,iconSize: 30, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.map), onPressed:(){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MapPage()),
+                        );
+                      } ,iconSize: 30, color: Colors.black),
                       new Container(
                         child: new Text('Map', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
                       )
@@ -44,7 +49,7 @@ class _UserPageState extends State<UserPage>{
                     ],
                   )
                 ],
-                alignment: MainAxisAlignment.spaceEvenly,
+                alignment: MainAxisAlignment.spaceAround,
               )
             ],
             mainAxisAlignment: MainAxisAlignment.end,

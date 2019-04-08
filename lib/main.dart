@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amberAccent
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Roadside TT'),
+      home: HomePage(title: 'Roadside TT'),
     );
   }
 }
@@ -35,7 +35,7 @@ class HomePageState extends State<HomePage> {
           title: Text(widget.title),
           centerTitle: true,
         ),
-        body: MyHomePage()
+        body: HomePage()
     );
   }
 }

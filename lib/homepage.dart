@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'map.dart';
+import 'viewmap.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  MyHomePageState createState() => MyHomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MapPage()),
+                        MaterialPageRoute(builder: (context) => ViewMapPage()),
                       );
                     },
                     child: const Text('View Map',

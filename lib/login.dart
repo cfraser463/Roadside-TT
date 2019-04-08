@@ -195,6 +195,7 @@ class LoginPageState extends State<LoginPage> {
       centerTitle: true,
     );
   }
+
   Widget buildPage(){
     return new Stack(
       fit: StackFit.expand,
@@ -398,7 +399,7 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 new ListTile(
                   contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
-                  leading: const Icon(Icons.lock),
+                  leading: const Icon(Icons.phone),
                   title: new TextFormField(
                     controller: regContactNumberController,
                     decoration: new InputDecoration(
