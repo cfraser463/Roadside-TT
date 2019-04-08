@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import pages
 //import 'user.dart';
 //import 'admin.dart';
-import 'map.dart';
+//import 'map.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,14 +21,17 @@ class LoginPageState extends State<LoginPage> {
   // -------------------- VARIABLES AND METHODS -----------------------------------------------------------------------
 
   final db = Firestore.instance;
+  DocumentSnapshot userObject ;
 
   // ------------ login variables ------------------------
+  String trueEmail = "";
+  String truePassword = "";
   String email = "";
   String password = "";
   FormType form = FormType.login;
 
-  final TextEditingController emailFilter = new TextEditingController();
-  final TextEditingController passwordFilter = new TextEditingController();
+  final TextEditingController loginEmailController = new TextEditingController();
+  final TextEditingController loginPasswordController = new TextEditingController();
   // ------------ register/create Account variables ------------------------
 
 //  fields needed in a user account
@@ -89,12 +92,48 @@ class LoginPageState extends State<LoginPage> {
     });
   }
 
-  void loginPressed () {
-    print('The user wants to login with $email and $password');
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MapPage()),
-    );
+  void loginPressed () async {
+    print("Login button pressed");
+//    DocumentReference ref = await db.collection('users').whereArrayContains('email': 'jtent@mail.com');
+
+
+    if(validLogin()){
+      alert("User logged in successfully");
+//      Navigator.push(
+//        context,
+//        MaterialPageRoute(builder: (context) => MapPage()),
+//      ); // end navigator.push
+    };// end if
+  }
+
+  bool validLogin(){
+    this.email = loginEmailController.text.toString();
+    this.password = loginPasswordController.text.toString();
+
+    if (email == "" || email == null) {
+      alert("Please enter your email address");
+//      alert("Please enter you full name");
+      return false;
+    }
+    else
+      if (password == "" || password == null) {
+        alert("Please enter your password");
+  //      alert("Please enter you full name");
+        return false;
+      }
+
+
+    db.collection('users')
+        .where("email", isEqualTo: "jtent@mail.com")
+        .snapshots()
+        .listen((data) =>
+        data.documents.forEach((doc) => userObject = doc));
+    if(
+      userObject["email"]== email &&
+      userObject["password"]== password
+    ) return true;
+    alert("Incorrect email or password");
+    return false;
   }
 
   void createAccountPressed () async{
@@ -296,7 +335,7 @@ class LoginPageState extends State<LoginPage> {
               contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
               leading: const Icon(Icons.person),
               title: new TextFormField(
-                controller: emailFilter,
+                controller: loginEmailController,
                 decoration: new InputDecoration(
                   fillColor: Colors.black,
                   hintText: 'Please enter email',
@@ -309,7 +348,7 @@ class LoginPageState extends State<LoginPage> {
               contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
               leading: const Icon(Icons.lock),
               title: new TextFormField(
-                controller: passwordFilter,
+                controller: loginPasswordController,
                 decoration: new InputDecoration(
                   hintText: 'Please enter password',
                   labelText: 'Enter Your Password',
