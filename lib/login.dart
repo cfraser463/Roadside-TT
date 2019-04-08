@@ -104,6 +104,7 @@ class LoginPageState extends State<LoginPage> {
 //        MaterialPageRoute(builder: (context) => MapPage()),
 //      ); // end navigator.push
     };// end if
+    print("Login was successful");
   }
 
   bool validLogin(){
