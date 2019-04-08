@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:geolocator/geolocator.dart';
 import 'user.dart';
 import 'admin.dart';
 
 class MapPage extends StatefulWidget {
-  static String tag= 'user-page';
+  static String tag= 'map-page';
   @override
   _MapPageState createState() => new _MapPageState();
 }
@@ -43,9 +44,9 @@ class _MapPageState extends State<MapPage>{
                   ),
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.map), onPressed:(){} ,iconSize: 30, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.map), onPressed:(){} ,iconSize: 30, color: Colors.lightBlueAccent),
                       new Container(
-                        child: new Text('Map', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
+                        child: new Text('Map', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.lightBlueAccent)),
                       )
                     ],
                   ),

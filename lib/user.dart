@@ -21,15 +21,15 @@ class _UserPageState extends State<UserPage>{
                 children: <Widget>[
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.home), onPressed:(){} ,iconSize: 34, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.home), onPressed:(){} ,iconSize: 30, color: Colors.lightBlueAccent),
                       new Container(
-                        child: new Text('Home', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
+                        child: new Text('Home', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.lightBlueAccent)),
                       )
                     ],
                   ),
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.map), onPressed:(){} ,iconSize: 34, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.map), onPressed:(){} ,iconSize: 30, color: Colors.black),
                       new Container(
                         child: new Text('Map', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
                       )
@@ -37,7 +37,7 @@ class _UserPageState extends State<UserPage>{
                   ),
                   new Column(
                     children: <Widget>[
-                      new IconButton(icon: Icon(Icons.insert_drive_file), onPressed:(){} ,iconSize: 34, color: Colors.black),
+                      new IconButton(icon: Icon(Icons.insert_drive_file), onPressed:(){} ,iconSize: 30, color: Colors.black),
                       new Container(
                         child: new Text('Requests', style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black)),
                       )

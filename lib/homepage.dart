@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'request.dart';
+import 'map.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -22,53 +22,56 @@ class MyHomePageState extends State<MyHomePage> {
                   image: AssetImage('assets/img/roadsideMobile.jpg'),
                   fit: BoxFit.cover),
             ),
-            child: new Column(
-              children: <Widget>[
-                new Image.asset('assets/icons/logo_transparent.png',
-                  alignment: Alignment.topCenter,
-                  fit: BoxFit.fitWidth,
-                ),
-                new RaisedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RequestPage()),
-                    );
-                  },
-                  child: const Text('Request Assistance',
-                    style: TextStyle(fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.amberAccent),),
-                  color: Colors.black,
-                  splashColor: Colors.grey,
-                  padding: const EdgeInsets.fromLTRB(80.0, 20.0, 80.0, 20.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0)
+            child: new Container(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: new Column(
+                children: <Widget>[
+                  new Image.asset('assets/icons/logo_transparent.png',
+                    alignment: Alignment.topCenter,
+                    fit: BoxFit.fitWidth,
                   ),
-                ),
-                new Container(
-                  padding: const EdgeInsets.only(top: 10.0),
-                ),
-                new RaisedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  child: const Text('Login',
-                    style: TextStyle(fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.amberAccent),),
-                  color: Colors.black,
-                  splashColor: Colors.grey,
-                  padding: const EdgeInsets.fromLTRB(140.0, 20.0, 140.0, 20.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0)
+                  new RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MapPage()),
+                      );
+                    },
+                    child: const Text('View Map',
+                      style: TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.amberAccent),),
+                    color: Colors.black,
+                    splashColor: Colors.grey,
+                    padding: const EdgeInsets.fromLTRB(80.0, 20.0, 80.0, 20.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0)
+                    ),
                   ),
-                ),
-              ],
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  new Container(
+                    padding: const EdgeInsets.only(top: 15.0),
+                  ),
+                  new RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: const Text('Login',
+                      style: TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.amberAccent),),
+                    color: Colors.black,
+                    splashColor: Colors.grey,
+                    padding: const EdgeInsets.fromLTRB(100.0, 20.0, 100.0, 20.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0)
+                    ),
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ) ,
             )
         ),
       ],
