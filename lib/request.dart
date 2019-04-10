@@ -119,19 +119,18 @@ class _RequestPageState extends State<RequestPage> {
       'location' : '$locationList',
     });
     setState(() => this.requestID = ref.documentID);
-//    print("Request made with id : " + this.requestID);
   }
 
   // this function returns a list with latitude in list(0) and longitude in list(1)
   // in future this can be a bool function which just sets the global variable called location
-  // so if submition called this can fail if there is an issue with getting the location from the phone
+  // so if called this can fail if there is an issue with getting the location from the phone
   List getLocation(){
     //Hard coded values have been used until we can access the mobiles location
-    final double lattitude = 10.626040;
+    final double latitude = 10.626040;
     final double longitude = -61.353627;
 
     List locationCoordinates= new List();
-    locationCoordinates.add(lattitude);
+    locationCoordinates.add(latitude);
     locationCoordinates.add(longitude);
     return locationCoordinates;
   }
@@ -149,17 +148,6 @@ class _RequestPageState extends State<RequestPage> {
         children: <Widget>[
           new Column(
             children: <Widget>[
-//              new ListTile(
-//                leading: const Icon(Icons.person,color: Colors.lightBlueAccent),
-//                title: new TextField(
-//                  controller: nameTextController,
-//                  scrollPadding: EdgeInsets.only(top: 20.0, bottom: 10.0),
-//                  decoration: new InputDecoration(
-//                    hintText: "Name",
-//                  ),
-//                ),
-//              ),
-
               //phone number field
               new ListTile(
                 leading: const Icon(Icons.phone,color: Colors.lightBlueAccent),
@@ -212,14 +200,10 @@ class _RequestPageState extends State<RequestPage> {
                 activeColor: Colors.red,
               ),
 
-              //Form submition button
+              //Form submission button
               new RaisedButton(
                 onPressed: () {
                   submitButtonPressed();
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(builder: (context) => RequestPage()),
-//                  );
                 },
                 child: const Text('Send request',
                   style: TextStyle(fontWeight: FontWeight.bold,

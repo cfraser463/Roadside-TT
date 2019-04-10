@@ -2,6 +2,7 @@
 //import libraries
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:validators/validators.dart';
 
 //import pages
 import 'map.dart';
@@ -116,47 +117,63 @@ class LoginPageState extends State<LoginPage> {
       });
       formChange();
     }
-//    print('Teast that create account worked --------------------------------------------');
 
   }
 
   bool validateCreateForm(){
     // this is only partial validation
     //TODO
-    // Email format
     // Ensure email not already used
     // phone number format
-    // compare regPassword and confirm password to be the same
     if (regName == "" || regName == null) {
       alert("Please enter your full name");
-//      alert("Please enter you full name");
       return false;
     }
-    else
-    if (regAge == "" || regAge == null) {
-      alert("Please enter your age");
+    else if (regName.length<6){
+      alert("Full name must be more than 6 characters.");
       return false;
     }
-    else
-    if (regEmail == "" || regEmail == null) {
-      alert("Please enter your email address");
-      return false;
-    }
-    else
-    if (regContactNumber == "" || regContactNumber == null) {
-      alert("Please enter your phone number");
-      return false;
-    }
-    else
-    if (regPassword == "" || regPassword == null) {
-      alert("Please enter a password");
-      return false;
-    }
-    else
-    if (confirmPassword == "" || confirmPassword == null) {
-      alert("Please confirm your password");
-      return false;
-    }
+    else if(!isAlpha(regName)){
+        alert("Please enter alpha characters.");
+        return false;
+      }
+      else
+        if (regAge == "" || regAge == null) {
+          alert("Please enter your age");
+          return false;
+        }
+        else if(!isNumeric(regAge)){
+            alert("Please enter a numberic value");
+            return false;
+          }
+          else
+            if (regEmail == "" || regEmail == null) {
+              alert("Please enter your email address");
+              return false;
+            }
+            else if (!isEmail(regEmail)){
+              alert("Enter valid email.");
+              return false;
+            }
+            else
+              if (regContactNumber == "" || regContactNumber == null) {
+                alert("Please enter your phone number");
+                return false;
+              }
+              else
+                if (regPassword == "" || regPassword == null) {
+                  alert("Please enter a password");
+                  return false;
+                }
+                else
+                  if (confirmPassword == "" || confirmPassword == null) {
+                    alert("Please confirm your password");
+                    return false;
+                  }
+                  else if(regPassword!=confirmPassword){
+                    alert("Passwords do not match.");
+                    return false;
+                  }
     return true;
   }
 
@@ -220,41 +237,6 @@ class LoginPageState extends State<LoginPage> {
                       ),
                       child: new Wrap(
                         children: <Widget>[
-//                              Center(
-//                                  child: new Container(
-//                                    padding: const EdgeInsets.only(top: 25.0,bottom: 10.0),
-//                                    child: new Text('Login', style: TextStyle(
-//                                      fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black,),
-//                                      textAlign: TextAlign.justify,
-//                                    ),
-//                                  )
-//                              ),
-//                              new ListTile(
-//                                contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
-//                                leading: const Icon(Icons.person),
-//                                title: new TextFormField(
-//                                  controller: emailFilter,
-//                                  decoration: new InputDecoration(
-//                                    fillColor: Colors.black,
-//                                    hintText: 'Please enter email',
-//                                    labelText: 'Enter Your Email address',
-//                                  ),
-//                                  keyboardType: TextInputType.emailAddress,
-//                                ),
-//                              ),
-//                              new ListTile(
-//                                contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 35.0),
-//                                leading: const Icon(Icons.lock),
-//                                title: new TextFormField(
-//                                  controller: passwordFilter,
-//                                  decoration: new InputDecoration(
-//                                    hintText: 'Please enter password',
-//                                    labelText: 'Enter Your Password',
-//                                  ),
-//                                  keyboardType: TextInputType.emailAddress,
-//                                  obscureText: true,
-//                                ),
-//                              ),
                           Center(
                             child: Container(
                               child: new Stack(
@@ -377,6 +359,7 @@ class LoginPageState extends State<LoginPage> {
                   leading: const Icon(Icons.person),
                   title: new TextFormField(
                     controller: regAgeController,
+                    keyboardType: TextInputType.number,
                     decoration: new InputDecoration(
                       fillColor: Colors.black,
                       hintText: 'Please enter your age',
@@ -389,19 +372,20 @@ class LoginPageState extends State<LoginPage> {
                   leading: const Icon(Icons.person),
                   title: new TextFormField(
                     controller: regEmailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: new InputDecoration(
                       fillColor: Colors.black,
                       hintText: 'Please enter email',
                       labelText: 'Enter Your Email address',
                     ),
-                    keyboardType: TextInputType.emailAddress,
                   ),
                 ),
                 new ListTile(
                   contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
-                  leading: const Icon(Icons.phone),
+                  leading: const Icon(Icons.phone_android),
                   title: new TextFormField(
                     controller: regContactNumberController,
+                    keyboardType: TextInputType.phone,
                     decoration: new InputDecoration(
                       hintText: 'Please enter contact number',
                       labelText: 'Enter a phone number',
