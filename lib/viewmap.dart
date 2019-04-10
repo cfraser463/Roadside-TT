@@ -20,7 +20,7 @@ class _ViewMapPageState extends State<ViewMapPage>{
         fit: StackFit.expand,
         children: <Widget>[
           new Container(
-            child: GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(10.6409,61.4003), zoom: 21),
+            child: GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(10.6409,-61.4003), zoom: 16),
               onMapCreated: (controller){
                 setState(() {
                   mycontroller= controller;

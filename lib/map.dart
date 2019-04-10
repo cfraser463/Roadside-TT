@@ -22,7 +22,7 @@ class _MapPageState extends State<MapPage>{
         children: <Widget>[
          new Container(
            margin: EdgeInsets.only(bottom: 75.0),
-           child: GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(10.6409,61.4003), zoom: 21),
+           child: GoogleMap(initialCameraPosition: CameraPosition(target: LatLng(10.6409,-61.4003), zoom: 21),
              onMapCreated: (controller){
               setState(() {
                 mycontroller= controller;

@@ -8,31 +8,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Roadside TT',
       theme: ThemeData(
           primaryColor: Colors.black,
           accentColor: Colors.amberAccent
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(title: 'Roadside TT'),
+      home: MainPage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class MainPage extends StatefulWidget {
   @override
-  HomePageState createState() => HomePageState();
+  MainPageState createState() => MainPageState();
 }
 
-class HomePageState extends State<HomePage> {
+class MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text("Roadside TT"),
           centerTitle: true,
         ),
         body: HomePage()

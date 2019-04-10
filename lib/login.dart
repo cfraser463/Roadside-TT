@@ -134,21 +134,21 @@ class LoginPageState extends State<LoginPage> {
       return false;
     }
     else if(!isAlpha(regName)){
-        alert("Please enter alpha characters.");
+        alert("Please enter characters a-z or A-Z.");
         return false;
       }
       else
         if (regAge == "" || regAge == null) {
-          alert("Please enter your age");
+          alert("Please enter your age.");
           return false;
         }
         else if(!isNumeric(regAge)){
-            alert("Please enter a numberic value");
+            alert("Please enter numeric characters.");
             return false;
           }
           else
             if (regEmail == "" || regEmail == null) {
-              alert("Please enter your email address");
+              alert("Please enter your email address.");
               return false;
             }
             else if (!isEmail(regEmail)){
@@ -158,6 +158,10 @@ class LoginPageState extends State<LoginPage> {
             else
               if (regContactNumber == "" || regContactNumber == null) {
                 alert("Please enter your phone number");
+                return false;
+              }
+              else if (regContactNumber.length<7){
+                alert("Phone number must be exactly 7 digits.");
                 return false;
               }
               else
@@ -356,7 +360,7 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 new ListTile(
                   contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
-                  leading: const Icon(Icons.person),
+                  leading: const Icon(Icons.cake),
                   title: new TextFormField(
                     controller: regAgeController,
                     keyboardType: TextInputType.number,
@@ -369,7 +373,7 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 new ListTile(
                   contentPadding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
-                  leading: const Icon(Icons.person),
+                  leading: const Icon(Icons.email),
                   title: new TextFormField(
                     controller: regEmailController,
                     keyboardType: TextInputType.emailAddress,

@@ -3,8 +3,6 @@ import 'login.dart';
 import 'viewmap.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-  final String title;
   @override
   HomePageState createState() => HomePageState();
 }
@@ -78,10 +76,6 @@ class HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          centerTitle: true,
-        ),
         body: homepage
     );
   }
